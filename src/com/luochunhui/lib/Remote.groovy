@@ -170,14 +170,21 @@ class Remote implements Serializable {
 
       def id = UUID.randomUUID().toString()
 
-      script.sh  "mkdir -p /tmp/${target}/${id}/"
+      script.sh  "mkdir -p /tmp/${target}/${id}/; mkdir -p ~/${target}/"
 
       script.dir("/tmp/${target}/${id}/") {
         script.deleteDir()
         script.unstash 'targetArchive'
       }
-      
-      script.sh "mkdir -p ~/${target}/; cd ~/${target}/ && tar zxf /tmp/${target}/${id}/${file}"
+
+      script.dir("~/${target}/") {
+        if(filename.endsWith("gz")) {
+          script.sh "tar zxf /tmp/${target}/${id}/${file}"
+        }
+        else {
+          script.sh "cp /tmp/${target}/${id}/${file} ./${file}"
+        }
+      }
 
       script.sh  "rm -r /tmp/${target}/${id}/"
 
