@@ -21,12 +21,12 @@ class Noticer implements Serializable {
 
       steps.node("master") {
         def fullMsg = "== ${project} @ ${inventory} ==\n [${level}]: ${msg}. \n #DevOps #${project} #${inventory}".toString()
-        steps.sh "/usr/bin/bearychat -t '${fullMsg}' -c 'DevOps,${project}' -m"
-        if (inventory == "prod") {
-          def gr = "管理组";
-          steps.sh "/usr/bin/bearychat -t '${fullMsg}' -c '${gr}' -m".toString()
-          steps.sh "/usr/bin/wechatnotify -t '${fullMsg}' -c '${gr}' -m".toString()
-        }
+        // steps.sh "/usr/bin/bearychat -t '${fullMsg}' -c 'DevOps,${project}' -m"
+        // if (inventory == "prod") {
+        //   def gr = "管理组";
+        //   steps.sh "/usr/bin/bearychat -t '${fullMsg}' -c '${gr}' -m".toString()
+        //   steps.sh "/usr/bin/wechatnotify -t '${fullMsg}' -c '${gr}' -m".toString()
+        // }
       }
     }
 }
