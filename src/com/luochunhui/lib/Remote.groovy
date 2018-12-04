@@ -182,7 +182,7 @@ class Remote implements Serializable {
           script.sh "tar zxf /tmp/${target}/${id}/${file}"
         }
         else {
-          script.sh "cp /tmp/${target}/${id}/${file} ./${file}"
+          script.sh "cp /tmp/${target}/${id}/${file} ./${filename}"
         }
       }
 
